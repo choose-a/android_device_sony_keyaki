@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/tone-common/PlatformConfig.mk
+# Bootanimation
+TARGET_BOOTANIMATION_SIZE := 1080x608
 
-TARGET_BOOTLOADER_BOARD_NAME := G8231
+# Inherit device parts
+$(call inherit-product, device/sony/keyaki/aosp_g8231.mk)
 
-WIFI_BUS := PCIE
+# Override Product Name
+PRODUCT_NAME := choose_keyaki
+PRODUCT_MODEL := Xperia XZs
 
-# NFC
-NXP_CHIP_TYPE := PN553
+# Assert
+TARGET_OTA_ASSERT_DEVICE := G8231,keyaki
 
-BOARD_KERNEL_CMDLINE += androidboot.hardware=keyaki
-
-#Reserve space for data encryption (21861990400-16384)
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 21861974016
-
-#TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/clearpad/wakeup_gesture"
+# Inherit rom parts
+$(call inherit-product, vendor/choose-a/config/gsm.mk)

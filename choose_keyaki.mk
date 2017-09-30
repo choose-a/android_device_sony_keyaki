@@ -12,4 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/choose_keyaki.mk
+# Bootanimation
+TARGET_BOOTANIMATION_SIZE := 1080x608
+
+# Inherit device parts
+$(call inherit-product, device/sony/keyaki/aosp_g8231.mk)
+
+# Override Product Name
+PRODUCT_NAME := choose_keyaki
+PRODUCT_MODEL := Xperia XZs
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := none

@@ -14,5 +14,4 @@
 # limitations under the License.
 #
 
-add_lunch_combo aosp_g8231-userdebug
-add_lunch_combo aosp_g8232-userdebug
+add_lunch_combo choose_keyaki-userdebug

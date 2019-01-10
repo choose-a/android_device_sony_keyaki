@@ -39,7 +39,6 @@ PRODUCT_COPY_FILES += \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/vendor/etc/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(DEVICE_PATH)/vendor/etc/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
 
 # Audio calibration
@@ -54,7 +53,7 @@ PRODUCT_COPY_FILES += \
 
 # NFC Configuration
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/vendor/etc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+    $(DEVICE_PATH)/vendor/etc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
     $(DEVICE_PATH)/vendor/etc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
 
 # BT FW patch
@@ -62,8 +61,13 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/vendor/firmware/BCM4359C0.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/BCM4359C0.hcd
 
 # WIFI FW patch
+ifeq ($(WIFI_DRIVER_BUILT),brcmfmac)
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/vendor/firmware/bcmdhd.cal:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4359-pcie.txt
+else
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/vendor/firmware/bcmdhd.cal:$(TARGET_COPY_OUT_VENDOR)/firmware/bcmdhd.cal
+endif
 
 # Device Init
 PRODUCT_PACKAGES += \
@@ -74,10 +78,6 @@ PRODUCT_PACKAGES += \
 # Simple PowerHAL
 PRODUCT_PACKAGES += \
     power.keyaki
-
-# NFC config
-PRODUCT_PACKAGES += \
-    nfc_nci.keyaki
 
 # Telephony Packages (AOSP)
 PRODUCT_PACKAGES += \
